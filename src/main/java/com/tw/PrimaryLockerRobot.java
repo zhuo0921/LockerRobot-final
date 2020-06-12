@@ -1,6 +1,7 @@
 package com.tw;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class PrimaryLockerRobot {
     private final List<Locker> lockers;
@@ -9,10 +10,10 @@ public class PrimaryLockerRobot {
         this.lockers = lockers;
     }
 
-    public Ticket store(Bag bag) {
+    public Ticket store(Bag bag) throws Throwable {
         Locker firstAvailableLocker = lockers.stream()
                 .filter(locker -> !locker.isFull())
-                .findFirst().get();
+                .findFirst().orElseThrow((Supplier<Throwable>) LockerAlreadyFullException::new);
         return firstAvailableLocker.store(bag);
     }
 }
