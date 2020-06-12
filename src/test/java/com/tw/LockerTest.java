@@ -1,10 +1,12 @@
 package com.tw;
 
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LockerTest {
     @Test
@@ -14,13 +16,13 @@ public class LockerTest {
         assertNotNull(ticket);
     }
 
-    @Test(expected = LockerAlreadyFullException.class)
+    @Test
     public void should_prompt_failure_when_store_bag_given_locker_is_full() {
         Locker locker = new Locker(1);
         Ticket ticket = locker.store(new Bag());
         assertNotNull(ticket);
 
-        locker.store(new Bag());
+        assertThrows(LockerAlreadyFullException.class, () -> locker.store(new Bag()));
     }
 
     @Test

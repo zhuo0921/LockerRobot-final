@@ -1,11 +1,14 @@
 package com.tw;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class PrimaryLockerRobotTest {
     @Test
@@ -32,10 +35,10 @@ public class PrimaryLockerRobotTest {
         assertEquals(myBag, bag);
     }
 
-    @Test(expected = LockerAlreadyFullException.class)
+    @Test
     public void should_prompt_failure_when_store_bag_given_robot_manage_two_lockers_and_both_are_full() throws Throwable {
         PrimaryLockerRobot robot = new PrimaryLockerRobot(Arrays.asList(new Locker(0), new Locker(0)));
         Bag myBag = new Bag();
-        robot.store(myBag);
+        assertThrows(LockerAlreadyFullException.class, () -> robot.store(myBag));
     }
 }
