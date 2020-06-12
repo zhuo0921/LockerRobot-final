@@ -24,4 +24,8 @@ public class Locker {
     public Bag fetch(Ticket ticket) {
         return storedBags.remove(ticket);
     }
+
+    public boolean isFull() {
+        return capacity == storedBags.size();
+    }
 }
