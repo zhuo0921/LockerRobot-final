@@ -11,4 +11,13 @@ public class LockerTest {
         LockerTicket ticket = locker.store(new Bag());
         assertNotNull(ticket);
     }
+
+    @Test(expected = LockerAlreadyFullException.class)
+    public void should_prompt_failure_when_store_bag_given_locker_is_full() {
+        Locker locker = new Locker(1);
+        LockerTicket ticket = locker.store(new Bag());
+        assertNotNull(ticket);
+
+        locker.store(new Bag());
+    }
 }
