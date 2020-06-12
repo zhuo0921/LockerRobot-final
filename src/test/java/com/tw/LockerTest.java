@@ -2,6 +2,7 @@ package com.tw;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class LockerTest {
@@ -19,5 +20,15 @@ public class LockerTest {
         assertNotNull(ticket);
 
         locker.store(new Bag());
+    }
+
+    @Test
+    public void should_get_bag_when_fetch_bag_given_valid_ticket() {
+        Locker locker = new Locker(10);
+        Bag myBag = new Bag();
+        LockerTicket ticket = locker.store(myBag);
+
+        Bag bag = locker.fetch(ticket);
+        assertEquals(myBag, bag);
     }
 }

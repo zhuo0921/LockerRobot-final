@@ -20,4 +20,8 @@ public class Locker {
         storedBags.put(ticket, bag);
         return ticket;
     }
+
+    public Bag fetch(LockerTicket ticket) {
+        return storedBags.get(ticket);
+    }
 }
