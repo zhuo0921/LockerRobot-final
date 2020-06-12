@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class LockerTest {
     @Test
@@ -30,5 +31,14 @@ public class LockerTest {
 
         Bag bag = locker.fetch(ticket);
         assertEquals(myBag, bag);
+    }
+
+    @Test
+    public void should_not_get_bag_when_fetch_bag_given_fake_ticket() {
+        Locker locker = new Locker(10);
+        locker.store(new Bag());
+
+        Bag bag = locker.fetch(new LockerTicket());
+        assertNull(bag);
     }
 }
