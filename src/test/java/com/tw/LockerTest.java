@@ -41,4 +41,16 @@ public class LockerTest {
         Bag bag = locker.fetch(new LockerTicket());
         assertNull(bag);
     }
+
+    @Test
+    public void should_not_get_bag_when_fetch_bag_given_ticket_already_used() {
+        Locker locker = new Locker(10);
+        Bag myBag = new Bag();
+        LockerTicket ticket = locker.store(myBag);
+
+        Bag bag = locker.fetch(ticket);
+        assertEquals(myBag, bag);
+
+        assertNull(locker.fetch(ticket));
+    }
 }

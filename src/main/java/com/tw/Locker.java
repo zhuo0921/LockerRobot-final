@@ -22,6 +22,6 @@ public class Locker {
     }
 
     public Bag fetch(LockerTicket ticket) {
-        return storedBags.get(ticket);
+        return storedBags.remove(ticket);
     }
 }
