@@ -5,23 +5,23 @@ import java.util.Map;
 
 public class Locker {
     private int capacity;
-    private Map<LockerTicket, Bag> storedBags = new HashMap<>();
+    private Map<Ticket, Bag> storedBags = new HashMap<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
 
     }
 
-    public LockerTicket store(Bag bag) {
+    public Ticket store(Bag bag) {
         if (storedBags.size() >= capacity) {
             throw new LockerAlreadyFullException();
         }
-        LockerTicket ticket = new LockerTicket();
+        Ticket ticket = new Ticket();
         storedBags.put(ticket, bag);
         return ticket;
     }
 
-    public Bag fetch(LockerTicket ticket) {
+    public Bag fetch(Ticket ticket) {
         return storedBags.remove(ticket);
     }
 }
