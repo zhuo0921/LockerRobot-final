@@ -25,4 +25,15 @@ public class PrimaryLockerRobotTest {
         Bag bag = firstLocker.fetch(ticket);
         assertSame(myBag, bag);
     }
+
+    @Test
+    void should_return_ticket_and_store_in_2nd_locker_when_store_bag_given_1st_locker_is_full_and_2nd_has_capacity() {
+        Locker secondLocker = new Locker(10);
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(Arrays.asList(new Locker(0), secondLocker));
+        Bag myBag = new Bag();
+        Ticket ticket = robot.store(myBag);
+
+        assertNotNull(ticket);
+        assertSame(myBag, secondLocker.fetch(ticket));
+    }
 }
