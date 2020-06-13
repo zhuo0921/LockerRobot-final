@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PrimaryLockerRobotTest {
     @Test
@@ -35,5 +36,11 @@ public class PrimaryLockerRobotTest {
 
         assertNotNull(ticket);
         assertSame(myBag, secondLocker.fetch(ticket));
+    }
+
+    @Test
+    void should_prompt_failure_when_store_bag_given_both_lockers_are_full() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(Arrays.asList(new Locker(0), new Locker(0)));
+        assertThrows(LockerAlreadyFullException.class, () -> robot.store(new Bag()));
     }
 }
