@@ -31,4 +31,13 @@ public class PrimaryLockerRobotTest {
         assertNotNull(ticket);
         assertSame(myBag, secondLocker.pickUpBy(ticket));
     }
+
+    @Test(expected = LockerIsFullException.class)
+    public void should_throw_LockerIsFullException_when_save_bag_given_robot_manage_two_lockers_and_both_are_full() {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(asList(new Locker(1), new Locker(1)));
+        robot.save(new Bag());
+        robot.save(new Bag());
+
+        robot.save(new Bag());
+    }
 }
