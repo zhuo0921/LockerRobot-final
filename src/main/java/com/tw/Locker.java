@@ -29,8 +29,4 @@ public class Locker {
         }
         return bag;
     }
-
-    public boolean isFull() {
-        return availableCapacity == 0;
-    }
 }
