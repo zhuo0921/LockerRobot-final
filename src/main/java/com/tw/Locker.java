@@ -33,4 +33,8 @@ public class Locker {
     public boolean isFull() {
         return availableCapacity == 0;
     }
+
+    public boolean contains(Ticket ticket) {
+        return savedBags.containsKey(ticket);
+    }
 }

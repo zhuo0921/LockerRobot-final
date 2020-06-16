@@ -17,4 +17,13 @@ public class PrimaryLockerRobot {
         }
         throw new LockerIsFullException();
     }
+
+    public Bag pickUpBy(Ticket ticket) {
+        for (Locker locker : lockers) {
+            if (locker.contains(ticket)) {
+                return locker.pickUpBy(ticket);
+            }
+        }
+        return null;
+    }
 }
