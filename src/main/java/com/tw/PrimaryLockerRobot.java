@@ -10,6 +10,11 @@ public class PrimaryLockerRobot {
     }
 
     public Ticket save(Bag bag) {
-        return lockers.get(0).save(bag);
+        for (Locker locker : lockers) {
+            if (!locker.isFull()) {
+                return locker.save(bag);
+            }
+        }
+        return null;
     }
 }
