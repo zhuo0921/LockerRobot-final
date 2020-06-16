@@ -1,58 +1,58 @@
 package com.tw;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertNotNull;
 
 public class LockerTest {
     @Test
-    public void should_return_ticket_when_store_bag_given_locker_has_capacity() {
+    public void should_return_ticket_when_locker_save_bag_given_locker_has_available_capacity() {
+
         Locker locker = new Locker(10);
-        Ticket ticket = locker.store(new Bag());
+
+        Ticket ticket = locker.save(new Bag());
+
         assertNotNull(ticket);
     }
 
-    @Test
-    public void should_prompt_failure_when_store_bag_given_locker_is_full() {
+    @Test(expected = LockerIsFullException.class)
+    public void should_throw_LockerIsFullException_when_locker_save_bag_given_locker_has_no_available_capacity() {
+
         Locker locker = new Locker(1);
-        Ticket ticket = locker.store(new Bag());
-        assertNotNull(ticket);
+        locker.save(new Bag());
 
-        assertThrows(LockerAlreadyFullException.class, () -> locker.store(new Bag()));
+        locker.save(new Bag());
     }
 
     @Test
-    public void should_get_bag_when_fetch_bag_given_valid_ticket() {
-        Locker locker = new Locker(10);
-        Bag myBag = new Bag();
-        Ticket ticket = locker.store(myBag);
+    public void should_get_bag_when_locker_pick_up_bag_given_a_valid_ticket() {
 
-        Bag bag = locker.fetch(ticket);
-        assertEquals(myBag, bag);
+        Locker locker = new Locker(1);
+        Bag savingBag = new Bag();
+        Ticket ticket = locker.save(savingBag);
+
+        Bag takingBag = locker.pickUpBy(ticket);
+
+        Assert.assertSame(savingBag, takingBag);
     }
 
-    @Test
-    public void should_not_get_bag_when_fetch_bag_given_fake_ticket() {
-        Locker locker = new Locker(10);
-        locker.store(new Bag());
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_locker_pick_up_bag_given_an_invalid_ticket() {
 
-        Bag bag = locker.fetch(new Ticket());
-        assertNull(bag);
+        Locker locker = new Locker(1);
+
+        locker.pickUpBy(null);
     }
 
-    @Test
-    public void should_not_get_bag_when_fetch_bag_given_ticket_already_used() {
-        Locker locker = new Locker(10);
-        Bag myBag = new Bag();
-        Ticket ticket = locker.store(myBag);
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_locker_pick_up_bag_given_a_reused_ticket() {
 
-        Bag bag = locker.fetch(ticket);
-        assertEquals(myBag, bag);
+        Locker locker = new Locker(1);
+        Ticket ticket = locker.save(new Bag());
+        locker.pickUpBy(ticket);
 
-        assertNull(locker.fetch(ticket));
+        locker.pickUpBy(ticket);
     }
 }

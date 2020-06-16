@@ -1,31 +1,32 @@
 package com.tw;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Locker {
     private int capacity;
-    private Map<Ticket, Bag> storedBags = new HashMap<>();
+    private int availableCapacity;
+    private HashMap<Ticket, Bag> savedBags = new HashMap<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
-
+        this.availableCapacity = capacity;
     }
 
-    public Ticket store(Bag bag) {
-        if (storedBags.size() >= capacity) {
-            throw new LockerAlreadyFullException();
+    public Ticket save(Bag bag) {
+        if (availableCapacity <= 0) {
+            throw new LockerIsFullException();
         }
         Ticket ticket = new Ticket();
-        storedBags.put(ticket, bag);
+        savedBags.put(ticket, bag);
+        availableCapacity--;
         return ticket;
     }
 
-    public Bag fetch(Ticket ticket) {
-        return storedBags.remove(ticket);
-    }
-
-    public boolean isFull() {
-        return capacity == storedBags.size();
+    public Bag pickUpBy(Ticket ticket) {
+        Bag bag = savedBags.remove(ticket);
+        if (bag == null) {
+            throw new InvalidTicketException();
+        }
+        return bag;
     }
 }
