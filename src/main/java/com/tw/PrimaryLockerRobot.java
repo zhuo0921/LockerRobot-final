@@ -24,6 +24,6 @@ public class PrimaryLockerRobot {
                 return locker.pickUpBy(ticket);
             }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }
