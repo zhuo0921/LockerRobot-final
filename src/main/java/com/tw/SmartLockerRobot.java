@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SmartLockerRobot extends AbstractLockerRobot {
 
-    public SmartLockerRobot(List<Locker> lockers) {
+    SmartLockerRobot(List<Locker> lockers) {
         super(lockers);
     }
 

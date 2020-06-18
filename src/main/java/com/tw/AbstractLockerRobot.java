@@ -3,9 +3,9 @@ package com.tw;
 import java.util.List;
 
 public abstract class AbstractLockerRobot implements LockerRobot {
-    protected final List<Locker> lockers;
+    final List<Locker> lockers;
 
-    public AbstractLockerRobot(List<Locker> lockers) {
+    AbstractLockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 

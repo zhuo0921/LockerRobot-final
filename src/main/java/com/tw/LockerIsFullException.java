@@ -1,4 +1,4 @@
 package com.tw;
 
-public class LockerIsFullException extends RuntimeException {
+class LockerIsFullException extends RuntimeException {
 }

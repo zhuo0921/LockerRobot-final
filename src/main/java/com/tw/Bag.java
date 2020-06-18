@@ -1,4 +1,4 @@
 package com.tw;
 
-public class Bag {
+class Bag {
 }

@@ -2,17 +2,15 @@ package com.tw;
 
 import java.util.HashMap;
 
-public class Locker {
-    private int capacity;
+class Locker {
     private int availableCapacity;
     private HashMap<Ticket, Bag> savedBags = new HashMap<>();
 
-    public Locker(int capacity) {
-        this.capacity = capacity;
+    Locker(int capacity) {
         this.availableCapacity = capacity;
     }
 
-    public Ticket save(Bag bag) {
+    Ticket save(Bag bag) {
         if (availableCapacity <= 0) {
             throw new LockerIsFullException();
         }
@@ -22,7 +20,7 @@ public class Locker {
         return ticket;
     }
 
-    public Bag pickUpBy(Ticket ticket) {
+    Bag pickUpBy(Ticket ticket) {
         Bag bag = savedBags.remove(ticket);
         if (bag == null) {
             throw new InvalidTicketException();
@@ -30,15 +28,15 @@ public class Locker {
         return bag;
     }
 
-    public boolean isFull() {
+    boolean isFull() {
         return availableCapacity == 0;
     }
 
-    public boolean contains(Ticket ticket) {
+    boolean contains(Ticket ticket) {
         return savedBags.containsKey(ticket);
     }
 
-    public int getAvailableCapacity() {
+    int getAvailableCapacity() {
         return availableCapacity;
     }
 }

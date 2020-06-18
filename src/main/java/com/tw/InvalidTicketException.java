@@ -1,4 +1,4 @@
 package com.tw;
 
-public class InvalidTicketException extends RuntimeException {
+class InvalidTicketException extends RuntimeException {
 }
