@@ -2,13 +2,13 @@ package com.tw;
 
 import java.util.List;
 
-public class PrimaryLockerRobot {
-    private final List<Locker> lockers;
+public class PrimaryLockerRobot extends AbstractLockerRobot {
 
     public PrimaryLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
+    @Override
     public Ticket save(Bag bag) {
         for (Locker locker : lockers) {
             if (!locker.isFull()) {
@@ -16,14 +16,5 @@ public class PrimaryLockerRobot {
             }
         }
         throw new LockerIsFullException();
-    }
-
-    public Bag pickUpBy(Ticket ticket) {
-        for (Locker locker : lockers) {
-            if (locker.contains(ticket)) {
-                return locker.pickUpBy(ticket);
-            }
-        }
-        throw new InvalidTicketException();
     }
 }

@@ -1,8 +1,5 @@
 package com.tw;
 
-//        5. Given robot管理两个locker，且拿到有效票; When robot取包，Then 取包成功
-//        6. Given robot管理两个locker，且拿到伪造票; When robot取包，Then 取包失败，提示非法票据
-
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
