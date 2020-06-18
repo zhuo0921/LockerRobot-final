@@ -1,5 +1,7 @@
 package com.tw;
 
+import com.tw.exception.InvalidTicketException;
+import com.tw.exception.LockerIsFullException;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;

@@ -1,6 +1,8 @@
 package com.tw;
 
 
+import com.tw.exception.InvalidTicketException;
+import com.tw.exception.LockerIsFullException;
 import org.junit.Assert;
 import org.junit.Test;
 

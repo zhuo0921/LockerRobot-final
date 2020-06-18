@@ -1,5 +1,8 @@
 package com.tw;
 
+import com.tw.exception.InvalidTicketException;
+import com.tw.exception.LockerIsFullException;
+
 import java.util.HashMap;
 
 class Locker {

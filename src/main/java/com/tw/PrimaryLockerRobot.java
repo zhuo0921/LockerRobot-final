@@ -1,5 +1,7 @@
 package com.tw;
 
+import com.tw.exception.LockerIsFullException;
+
 import java.util.List;
 
 public class PrimaryLockerRobot extends AbstractLockerRobot {
