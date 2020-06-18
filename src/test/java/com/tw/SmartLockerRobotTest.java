@@ -1,6 +1,5 @@
 package com.tw;
 
-//        4. Given robot管理两个locker，且两个locker都存满了; When robot存包，Then 存包失败，提示locker已满
 //        5. Given robot管理两个locker，且拿到有效票; When robot取包，Then 取包成功
 //        6. Given robot管理两个locker，且拿到伪造票; When robot取包，Then 取包失败，提示非法票据
 
@@ -52,5 +51,16 @@ public class SmartLockerRobotTest {
         SmartLockerRobot robot = new SmartLockerRobot(asList(new Locker(0), new Locker(0)));
 
         robot.save(new Bag());
+    }
+
+    @Test
+    public void should_return_bag_when_pickup_bag_given_valid_ticket() {
+        SmartLockerRobot robot = new SmartLockerRobot(asList(new Locker(2), new Locker(3)));
+        Bag myBag = new Bag();
+        Ticket ticket = robot.save(myBag);
+
+        Bag bag = robot.pickUpBy(ticket);
+
+        assertSame(myBag, bag);
     }
 }

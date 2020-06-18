@@ -13,4 +13,13 @@ public class SmartLockerRobot {
         lockers.sort((o1, o2) -> o2.getAvailableCapacity() - o1.getAvailableCapacity());
         return lockers.get(0).save(bag);
     }
+
+    public Bag pickUpBy(Ticket ticket) {
+        for (Locker locker : lockers) {
+            if (locker.contains(ticket)) {
+                return locker.pickUpBy(ticket);
+            }
+        }
+        return null;
+    }
 }
