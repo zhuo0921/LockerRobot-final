@@ -63,4 +63,11 @@ public class SmartLockerRobotTest {
 
         assertSame(myBag, bag);
     }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_pickup_bag_given_invalid_ticket() {
+        SmartLockerRobot robot = new SmartLockerRobot(asList(new Locker(2), new Locker(3)));
+
+        robot.pickUpBy(new Ticket());
+    }
 }
