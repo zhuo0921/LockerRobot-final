@@ -20,3 +20,19 @@
 5. Given robot管理两个locker，且拿到有效票; When robot取包，Then 取包成功
 6. Given robot管理两个locker，且拿到伪造票; When robot取包，Then 取包失败，提示非法票据
 
+## locker robot manager
+1. Given manager管理两个locker，且都有可用容量，且manager没有管理robot，when manager存包，then 成功存入manager管理的第一个locker，返回票据
+2. Given manager管理两个locker，第一个locker已满，第二个locker有可用容量，且manager没有管理robot，when manager存包，then 成功存入manager管理的第二个locker，返回票据
+3. Given manager管理两个locker，且两个locker均已满，且manager没有管理robot，when manager存包，then 存包失败，提示locker已满
+4. Given manager没有管理locker，且manager管理2个robot，且两个robot管理的locker都有空间，when manager存包，then 成功由第一个robot进行存包，返回票据
+5. Given manager没有管理locker，且manager管理2个robot，且第一个robot管理的locker已满，第二个robot管理的locker有空间，when manager存包，then 成功由第二个robot进行存包，返回票据
+6. Given manager没有管理locker，且manager管理2个robot，且两个robot管理的locker已满，when manager存包，then 存包失败，提示locker已满
+7. Given manager管理1个locker，且manager管理1个robot，且均有剩余空间，when manager存包，then 成功由robot进行存包，返回票据
+8. Given manager管理1个locker，且manager管理1个robot，且robot管理的locker已满，when manager存包，then 成功存入manager管理的locker，返回票据  
+9. Given manager管理1个locker，且manager管理1个robot，且均已满，when manager存包，then 存包失败，提示locker已满  
+10. Given manager管理2个locker，且manager没有管理robot，且票据有效，when manager取包，then 取包成功
+11. Given manager管理2个locker，且manager没有管理robot，且票据无效，when manager取包，then 取包失败，提示非法票据
+12. Given manager没有管理locker，且manager管理2个robot，且票据有效，when manager取包，then 取包成功
+13. Given manager没有管理locker，且manager管理2个robot，且票据无效，when manager取包，then 取包失败，提示非法票据
+14. Given manager管理1个locker和1个robot，且票据有效，when manager取包，then 取包成功
+15. Given manager管理1个locker和1个robot，且票据无效，when manager取包，then 取包失败，提示非法票据
