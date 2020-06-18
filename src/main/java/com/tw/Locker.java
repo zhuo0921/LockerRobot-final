@@ -5,15 +5,15 @@ import com.tw.exception.LockerIsFullException;
 
 import java.util.HashMap;
 
-class Locker {
+public class Locker {
     private int availableCapacity;
     private HashMap<Ticket, Bag> savedBags = new HashMap<>();
 
-    Locker(int capacity) {
+    public Locker(int capacity) {
         this.availableCapacity = capacity;
     }
 
-    Ticket save(Bag bag) {
+    public Ticket save(Bag bag) {
         if (availableCapacity <= 0) {
             throw new LockerIsFullException();
         }
@@ -23,7 +23,7 @@ class Locker {
         return ticket;
     }
 
-    Bag pickUpBy(Ticket ticket) {
+    public Bag pickUpBy(Ticket ticket) {
         Bag bag = savedBags.remove(ticket);
         if (bag == null) {
             throw new InvalidTicketException();
@@ -31,15 +31,15 @@ class Locker {
         return bag;
     }
 
-    boolean isFull() {
+    public boolean isFull() {
         return availableCapacity == 0;
     }
 
-    boolean contains(Ticket ticket) {
+    public boolean contains(Ticket ticket) {
         return savedBags.containsKey(ticket);
     }
 
-    int getAvailableCapacity() {
+    public int getAvailableCapacity() {
         return availableCapacity;
     }
 }

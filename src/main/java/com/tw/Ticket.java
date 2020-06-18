@@ -1,4 +1,4 @@
 package com.tw;
 
-class Ticket {
+public class Ticket {
 }

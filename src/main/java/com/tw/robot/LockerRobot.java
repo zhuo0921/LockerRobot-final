@@ -1,4 +1,7 @@
-package com.tw;
+package com.tw.robot;
+
+import com.tw.Bag;
+import com.tw.Ticket;
 
 public interface LockerRobot {
 

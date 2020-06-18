@@ -1,7 +1,11 @@
-package com.tw;
+package com.tw.robot;
 
+import com.tw.Bag;
+import com.tw.Locker;
+import com.tw.Ticket;
 import com.tw.exception.InvalidTicketException;
 import com.tw.exception.LockerIsFullException;
+import com.tw.robot.PrimaryLockerRobot;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
