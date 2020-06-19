@@ -35,7 +35,7 @@ public class LockerTest {
         Bag savingBag = new Bag();
         Ticket ticket = locker.save(savingBag);
 
-        Bag takingBag = locker.pickUpBy(ticket);
+        Bag takingBag = locker.pickUp(ticket);
 
         Assert.assertSame(savingBag, takingBag);
     }
@@ -45,7 +45,7 @@ public class LockerTest {
 
         Locker locker = new Locker(1);
 
-        locker.pickUpBy(null);
+        locker.pickUp(null);
     }
 
     @Test(expected = InvalidTicketException.class)
@@ -53,8 +53,8 @@ public class LockerTest {
 
         Locker locker = new Locker(1);
         Ticket ticket = locker.save(new Bag());
-        locker.pickUpBy(ticket);
+        locker.pickUp(ticket);
 
-        locker.pickUpBy(ticket);
+        locker.pickUp(ticket);
     }
 }

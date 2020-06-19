@@ -21,7 +21,7 @@ public class SmartLockerRobotTest {
         Ticket ticket = robot.save(myBag);
 
         assertNotNull(ticket);
-        assertSame(myBag, firstLocker.pickUpBy(ticket));
+        assertSame(myBag, firstLocker.pickUp(ticket));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class SmartLockerRobotTest {
         Ticket ticket = robot.save(myBag);
 
         assertNotNull(ticket);
-        assertSame(myBag, secondLocker.pickUpBy(ticket));
+        assertSame(myBag, secondLocker.pickUp(ticket));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SmartLockerRobotTest {
         Ticket ticket = robot.save(myBag);
 
         assertNotNull(ticket);
-        assertSame(myBag, firstLocker.pickUpBy(ticket));
+        assertSame(myBag, firstLocker.pickUp(ticket));
     }
 
     @Test(expected = LockerIsFullException.class)

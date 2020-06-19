@@ -23,7 +23,7 @@ public class Locker {
         return ticket;
     }
 
-    public Bag pickUpBy(Ticket ticket) {
+    public Bag pickUp(Ticket ticket) {
         Bag bag = savedBags.remove(ticket);
         if (bag == null) {
             throw new InvalidTicketException();

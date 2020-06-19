@@ -5,7 +5,6 @@ import com.tw.Locker;
 import com.tw.Ticket;
 import com.tw.exception.InvalidTicketException;
 import com.tw.exception.LockerIsFullException;
-import com.tw.robot.PrimaryLockerRobot;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
@@ -22,7 +21,7 @@ public class PrimaryLockerRobotTest {
         Ticket ticket = robot.save(myBag);
 
         assertNotNull(ticket);
-        assertSame(myBag, firstLocker.pickUpBy(ticket));
+        assertSame(myBag, firstLocker.pickUp(ticket));
     }
 
     @Test
@@ -35,7 +34,7 @@ public class PrimaryLockerRobotTest {
         Ticket ticket = robot.save(myBag);
 
         assertNotNull(ticket);
-        assertSame(myBag, secondLocker.pickUpBy(ticket));
+        assertSame(myBag, secondLocker.pickUp(ticket));
     }
 
     @Test(expected = LockerIsFullException.class)

@@ -7,7 +7,7 @@ import com.tw.exception.InvalidTicketException;
 
 import java.util.List;
 
-public abstract class AbstractLockerRobot implements LockerRobot {
+public abstract class AbstractLockerRobot {
     final List<Locker> lockers;
 
     AbstractLockerRobot(List<Locker> lockers) {
@@ -17,7 +17,7 @@ public abstract class AbstractLockerRobot implements LockerRobot {
     public Bag pickUpBy(Ticket ticket) {
         for (Locker locker : lockers) {
             if (locker.contains(ticket)) {
-                return locker.pickUpBy(ticket);
+                return locker.pickUp(ticket);
             }
         }
         throw new InvalidTicketException();
