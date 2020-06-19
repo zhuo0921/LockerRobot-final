@@ -7,10 +7,10 @@ import com.tw.exception.InvalidTicketException;
 
 import java.util.List;
 
-public abstract class AbstractLockerRobot {
+public class LockerRobot {
     final List<Locker> lockers;
 
-    AbstractLockerRobot(List<Locker> lockers) {
+    LockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 
