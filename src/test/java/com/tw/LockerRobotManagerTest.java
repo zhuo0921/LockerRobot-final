@@ -114,4 +114,15 @@ public class LockerRobotManagerTest {
         assertNotNull(ticket);
         assertSame(myBag, managerLocker.pickUp(ticket));
     }
+
+    @Test(expected = LockerIsFullException.class)
+    public void should_throw_LockerIsFullException_when_save_bag_given_manager_has_a_robot_and_a_locker_both_are_full() {
+        Locker robotLocker = new Locker(1);
+        Locker managerLocker = new Locker(1);
+        LockerRobotManager manager = new LockerRobotManager(asList(new PrimaryLockerRobot(singletonList(robotLocker)), managerLocker));
+        robotLocker.save(new Bag());
+        managerLocker.save(new Bag());
+
+        manager.save(new Bag());
+    }
 }
