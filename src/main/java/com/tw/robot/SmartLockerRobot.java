@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SmartLockerRobot extends LockerRobot {
 
-    SmartLockerRobot(List<Locker> lockers) {
+    public SmartLockerRobot(List<Locker> lockers) {
         super(lockers);
     }
 
