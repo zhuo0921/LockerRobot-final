@@ -16,8 +16,10 @@ public class LockerRobotManager {
     }
 
     public Ticket save(Bag bag) {
-        if (!robots.isEmpty()) {
-            return robots.get(0).save(bag);
+        for (LockerRobot robot : robots) {
+            if (!robot.isFull()) {
+                return robot.save(bag);
+            }
         }
 
         for (Locker locker : lockers) {

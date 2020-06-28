@@ -6,6 +6,7 @@ import com.tw.Ticket;
 import com.tw.exception.InvalidTicketException;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class LockerRobot {
     final List<Locker> lockers;
@@ -25,4 +26,7 @@ public abstract class LockerRobot {
         throw new InvalidTicketException();
     }
 
+    public boolean isFull() {
+        return lockers.stream().allMatch(Locker::isFull);
+    }
 }

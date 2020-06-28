@@ -63,4 +63,20 @@ public class LockerRobotManagerTest {
         assertNotNull(ticket);
         assertSame(myBag, firstRobotLocker.pickUp(ticket));
     }
+
+    @Test
+    public void should_return_ticket_and_save_to_2nd_robot_when_save_bag_given_manager_has_two_robots_1st_is_full_2nd_has_capacity_and_no_lockers() {
+        Locker firstRobotLocker = new Locker(1);
+        Locker secondRobotLocker = new Locker(2);
+        LockerRobotManager manager = new LockerRobotManager(emptyList(),
+                asList(new PrimaryLockerRobot(singletonList(firstRobotLocker)),
+                        new PrimaryLockerRobot(singletonList(secondRobotLocker))));
+        firstRobotLocker.save(new Bag());
+
+        Bag myBag = new Bag();
+        Ticket ticket = manager.save(myBag);
+
+        assertNotNull(ticket);
+        assertSame(myBag, secondRobotLocker.pickUp(ticket));
+    }
 }
