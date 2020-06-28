@@ -1,5 +1,6 @@
 package com.tw;
 
+import com.tw.exception.InvalidTicketException;
 import com.tw.exception.LockerIsFullException;
 import com.tw.robot.PrimaryLockerRobot;
 import com.tw.robot.SmartLockerRobot;
@@ -136,4 +137,27 @@ public class LockerRobotManagerTest {
 
         assertSame(myBag, bag);
     }
+
+    @Test
+    public void should_return_bag_from_2nd_locker_when_pickup_bag_given_manager_has_two_lockers_and_no_robots_and_ticket_is_valid() {
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager manager = new LockerRobotManager(asList(firstLocker, new Locker(5)));
+        firstLocker.save(new Bag());
+        Bag myBag = new Bag();
+        Ticket ticket = manager.save(myBag);
+
+        Bag bag = manager.pickUp(ticket);
+
+        assertSame(myBag, bag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_pickup_bag_given_manager_has_two_lockers_and_no_robots_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new Locker(2), new Locker(5)));
+
+        manager.pickUp(new Ticket());
+    }
+
+
+
 }

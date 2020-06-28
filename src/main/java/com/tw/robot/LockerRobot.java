@@ -7,6 +7,7 @@ import com.tw.Ticket;
 import com.tw.exception.InvalidTicketException;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class LockerRobot implements Storable {
     final List<Locker> lockers;
@@ -31,5 +32,10 @@ public abstract class LockerRobot implements Storable {
     @Override
     public boolean isFull() {
         return lockers.stream().allMatch(Locker::isFull);
+    }
+
+    @Override
+    public boolean contains(Ticket ticket) {
+        return lockers.stream().anyMatch(locker -> locker.contains(ticket));
     }
 }

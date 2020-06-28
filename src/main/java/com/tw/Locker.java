@@ -38,6 +38,7 @@ public class Locker implements Storable {
         return availableCapacity == 0;
     }
 
+    @Override
     public boolean contains(Ticket ticket) {
         return savedBags.containsKey(ticket);
     }
