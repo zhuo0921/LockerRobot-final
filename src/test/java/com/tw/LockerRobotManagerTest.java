@@ -169,4 +169,12 @@ public class LockerRobotManagerTest {
 
         assertSame(myBag, bag);
     }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_pickup_bag_given_manager_has_two_robots_and_no_lockers_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new PrimaryLockerRobot(singletonList(new Locker(1))),
+                new SmartLockerRobot(singletonList(new Locker(2)))));
+
+        manager.pickUp(new Ticket());
+    }
 }
