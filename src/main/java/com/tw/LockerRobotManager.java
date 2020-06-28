@@ -8,12 +8,18 @@ import java.util.List;
 public class LockerRobotManager {
 
     private final List<Locker> lockers;
+    private final List<LockerRobot> robots;
 
     public LockerRobotManager(List<Locker> lockers, List<LockerRobot> robots) {
         this.lockers = lockers;
+        this.robots = robots;
     }
 
     public Ticket save(Bag bag) {
+        if (!robots.isEmpty()) {
+            return robots.get(0).save(bag);
+        }
+
         for (Locker locker : lockers) {
             if (!locker.isFull()) {
                 return locker.save(bag);

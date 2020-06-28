@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PrimaryLockerRobot extends LockerRobot {
 
-    PrimaryLockerRobot(List<Locker> lockers) {
+    public PrimaryLockerRobot(List<Locker> lockers) {
         super(lockers);
     }
 

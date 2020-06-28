@@ -7,12 +7,14 @@ import com.tw.exception.InvalidTicketException;
 
 import java.util.List;
 
-public class LockerRobot {
+public abstract class LockerRobot {
     final List<Locker> lockers;
 
     LockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
+
+    public abstract Ticket save(Bag bag);
 
     public Bag pickUpBy(Ticket ticket) {
         for (Locker locker : lockers) {
@@ -22,4 +24,5 @@ public class LockerRobot {
         }
         throw new InvalidTicketException();
     }
+
 }
