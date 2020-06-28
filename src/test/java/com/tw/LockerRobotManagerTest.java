@@ -177,4 +177,26 @@ public class LockerRobotManagerTest {
 
         manager.pickUp(new Ticket());
     }
+
+
+    @Test
+    public void should_return_bag_when_pickup_bag_given_manager_has_a_robot_and_a_locker_and_ticket_is_valid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new PrimaryLockerRobot(singletonList(new Locker(1))),
+                new Locker(2)));
+        Bag myBag = new Bag();
+        Ticket ticket = manager.save(myBag);
+
+        Bag bag = manager.pickUp(ticket);
+
+        assertSame(myBag, bag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_pickup_bag_given_manager_has_a_robot_and_a_locker_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new PrimaryLockerRobot(singletonList(new Locker(1))),
+                new Locker(2)));
+
+        manager.pickUp(new Ticket());
+    }
+
 }
