@@ -125,4 +125,15 @@ public class LockerRobotManagerTest {
 
         manager.save(new Bag());
     }
+
+    @Test
+    public void should_return_bag_when_pickup_bag_given_manager_has_two_lockers_and_no_robots_and_ticket_is_valid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new Locker(2), new Locker(5)));
+        Bag myBag = new Bag();
+        Ticket ticket = manager.save(myBag);
+
+        Bag bag = manager.pickUp(ticket);
+
+        assertSame(myBag, bag);
+    }
 }
