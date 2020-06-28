@@ -1,5 +1,6 @@
 package com.tw;
 
+import com.tw.exception.LockerIsFullException;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
@@ -34,4 +35,14 @@ public class LockerRobotManagerTest {
         assertSame(myBag, secondLocker.pickUp(ticket));
     }
 
+    @Test(expected = LockerIsFullException.class)
+    public void should_throw_LockerIsFullException_when_save_bag_given_manager_has_two_lockers_both_are_full_and_no_robots() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        LockerRobotManager manager = new LockerRobotManager(asList(firstLocker, secondLocker), emptyList());
+        firstLocker.save(new Bag());
+        secondLocker.save(new Bag());
+
+        manager.save(new Bag());
+    }
 }

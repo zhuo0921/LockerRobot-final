@@ -1,5 +1,6 @@
 package com.tw;
 
+import com.tw.exception.LockerIsFullException;
 import com.tw.robot.LockerRobot;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public class LockerRobotManager {
                 return locker.save(bag);
             }
         }
-        return null;
+        throw new LockerIsFullException();
     }
 }
