@@ -6,21 +6,20 @@ import com.tw.exception.LockerIsFullException;
 import java.util.HashMap;
 
 public class Locker implements Storable {
-    private int availableCapacity;
-    private HashMap<Ticket, Bag> savedBags = new HashMap<>();
+    private final int capacity;
+    private final HashMap<Ticket, Bag> savedBags = new HashMap<>();
 
     public Locker(int capacity) {
-        this.availableCapacity = capacity;
+        this.capacity = capacity;
     }
 
     @Override
     public Ticket save(Bag bag) {
-        if (availableCapacity <= 0) {
+        if (isFull()) {
             throw new LockerIsFullException();
         }
         Ticket ticket = new Ticket();
         savedBags.put(ticket, bag);
-        availableCapacity--;
         return ticket;
     }
 
@@ -35,15 +34,15 @@ public class Locker implements Storable {
 
     @Override
     public boolean isFull() {
-        return availableCapacity == 0;
+        return getAvailableCapacity() == 0;
+    }
+
+    public int getAvailableCapacity() {
+        return capacity - savedBags.size();
     }
 
     @Override
     public boolean contains(Ticket ticket) {
         return savedBags.containsKey(ticket);
-    }
-
-    public int getAvailableCapacity() {
-        return availableCapacity;
     }
 }
