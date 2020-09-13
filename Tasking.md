@@ -36,3 +36,46 @@
 13. Given manager没有管理locker，且manager管理2个robot，且票据无效，when manager取包，then 取包失败，提示非法票据
 14. Given manager管理1个locker和1个robot，且票据有效，when manager取包，then 取包成功
 15. Given manager管理1个locker和1个robot，且票据无效，when manager取包，then 取包失败，提示非法票据
+
+### Locker Robot Director
+1. Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager只管理两个Locker，并且两个Locker的可用容量和容量分别为：0，5；3，5
+   When LockerRobotDirector统计报表
+   Then 报表内容为
+        M 3 10
+             L 0 5
+             L 3 5
+
+2. Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager只管理两个Robot，第一个robot管理两个locker，可用容量和容量分别为：1，3；2，6；第二个robot管理一个locker，可用容量和容量分别是2，4
+   When LockerRobotDirector统计报表
+   Then 报表内容为
+        M 5 13
+            R 3 9
+                L 1 3
+                L 2 6
+            R 2 4
+                L 2 4
+
+3. Given LockerRobotDirector管理一个LockerRobotManager。LockerRobotManager管理一个Locker且可用容量和容量分别为：2，5，管理一个PrimaryLockerRobot，PrimaryLockerRobot只管理一个Locker且可用容量和容量分别为：1，5
+   When LockerRobotDirector统计报表
+   Then 报表内容为
+        M 3 10
+            L 2 5
+            R 1 5
+                L 1 5
+
+
+4. Given LockerRobotDirector管理两个LockerRobotManager，第一个Manager只管理一个Locker，可用容量和容量分别为：3，5；第二个Manager管理一个robot，robot管理一个locker，可用容量和容量分别为：1，3
+   When LockerRobotDirector统计报表
+   Then 报表内容为
+        M 3 5
+            L 3 5
+        M 1 3
+            R 1 3
+                L 1 3
+
+5. Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager只管理两个Locker，并且两个Locker的可用容量和容量分别为：0，8；3，5。存在一个不被LockerRobotManager管理的Locker和PrimaryLockerRobot，可用容量和容量分别为：2，6；3，8
+   When LockerRobotDirector统计报表
+   Then 报表内容为
+        M 3 13
+             L 0 8
+             L 3 5
