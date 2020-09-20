@@ -2,59 +2,47 @@ package com.tw;
 
 
 import com.tw.exception.InvalidTicketException;
-import com.tw.exception.LockerIsFullException;
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 public class LockerTest {
+
+    @Rule
+    public ExpectedException expectedEx = ExpectedException.none();
+
     @Test
-    public void should_return_ticket_when_locker_save_bag_given_locker_has_available_capacity() {
-
-        Locker locker = new Locker(10);
-
-        Ticket ticket = locker.save(new Bag());
-
-        assertNotNull(ticket);
-    }
-
-    @Test(expected = LockerIsFullException.class)
-    public void should_throw_LockerIsFullException_when_locker_save_bag_given_locker_has_no_available_capacity() {
-
-        Locker locker = new Locker(1);
-        locker.save(new Bag());
-
-        locker.save(new Bag());
+    public void given_lockerA_capacity_is_12_when_store_a_bag_then_store_successfully_and_get_valid_ticketA() {
+        Locker lockerA = new Locker(12);
+        Bag bagA = new Bag(Size.SMALL);
+        Ticket ticketA = lockerA.store(bagA);
+        assertNotNull(ticketA);
     }
 
     @Test
-    public void should_get_bag_when_locker_pick_up_bag_given_a_valid_ticket() {
+    public void given_lockerA_stored_bagA_when_get_bag_with_valid_ticket_then_get_bagA() {
+        Locker lockerA = new Locker(1);
+        Bag bagA = new Bag(Size.SMALL);
+        Ticket ticketA = lockerA.store(bagA);
 
-        Locker locker = new Locker(1);
-        Bag savingBag = new Bag();
-        Ticket ticket = locker.save(savingBag);
+        Bag bagFromLocker = lockerA.getBag(ticketA);
 
-        Bag takingBag = locker.pickUp(ticket);
-
-        Assert.assertSame(savingBag, takingBag);
+        assertNotNull(bagFromLocker);
+        assertEquals(bagA, bagFromLocker);
     }
 
-    @Test(expected = InvalidTicketException.class)
-    public void should_throw_InvalidTicketException_when_locker_pick_up_bag_given_an_invalid_ticket() {
+    @Test
+    public void given_lockerA_stored_bagA_and_bagB_and_ticketA_has_been_used_to_get_bagA_when_get_bag_with_ticketA_again_then_get_error_message() throws InvalidTicketException {
+        Locker lockerA = new Locker(12);
+        Bag bagA = new Bag(Size.SMALL);
+        Bag bagB = new Bag(Size.SMALL);
+        Ticket ticketA = lockerA.store(bagA);
+        lockerA.store(bagB);
+        lockerA.getBag(ticketA);
 
-        Locker locker = new Locker(1);
-
-        locker.pickUp(null);
-    }
-
-    @Test(expected = InvalidTicketException.class)
-    public void should_throw_InvalidTicketException_when_locker_pick_up_bag_given_a_reused_ticket() {
-
-        Locker locker = new Locker(1);
-        Ticket ticket = locker.save(new Bag());
-        locker.pickUp(ticket);
-
-        locker.pickUp(ticket);
+        expectedEx.expect(InvalidTicketException.class);
+        lockerA.getBag(ticketA);
     }
 }

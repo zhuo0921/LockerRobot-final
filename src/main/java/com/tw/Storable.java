@@ -1,11 +1,11 @@
 package com.tw;
 
 public interface Storable {
-    Ticket save(Bag bag);
-
-    Bag pickUp(Ticket ticket);
+    Ticket store(Bag bag);
 
     boolean isFull();
 
-    boolean contains(Ticket ticket);
+    Bag pickup(Ticket ticket);
+
+    boolean containTicket(Ticket ticket);
 }
